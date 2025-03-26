@@ -1,0 +1,64 @@
+/* CAROUSAL */
+.carousel-item img {
+    height: 80vh;
+    object-fit: cover;
+    filter: brightness(80%) contrast(110%);
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(100%);
+}
+
+/* FILTER */
+
+.filter-section {
+    background-color: blue;
+    padding: 15px;
+    border-radius: 10px;
+}
+.filter-btn {
+    background-color: #1c3b30;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+.filter-btn:hover {
+    background-color: #162d26;
+}
+
+/* MODAL */
+.modal-content {
+    border-radius: 10px;
+    padding: 20px;
+}
+.modal-header {
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+.form-control {
+    height: 50px; 
+}
+.input-group-text{
+    border: none;
+    background-color: none;
+}
+.form-floating label {
+    color: #6c757d;
+    transition: all 0.2s ease-in-out;
+}
+.form-floating input:focus + label {
+    color: #000;
+}
