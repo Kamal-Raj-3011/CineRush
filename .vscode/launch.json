@@ -9,6 +9,16 @@
             "projectName": "spring_mvc",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringRestApiApplication<spring_rest_api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cinerush.spring_rest_api.SpringRestApiApplication",
+            "projectName": "spring_rest_api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

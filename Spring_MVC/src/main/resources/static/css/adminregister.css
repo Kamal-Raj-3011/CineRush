@@ -1,0 +1,73 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4A90E2, #F0F4F8); /* Soft blue to light gray gradient */
+}
+
+.auth-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    background: #FFFFFF; /* Pure white background for the card */
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+.auth-card h3 {
+    color: #2C3E50; /* Dark slate for headings */
+}
+
+.form-label {
+    color: #6B7280; /* Medium gray for labels */
+}
+
+.form-control {
+    border: 2px solid #E2E8F0; /* Light gray border for inputs */
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    transition: border-color 0.3s ease;
+    color: #6B7280; /* Medium gray for placeholder text */
+}
+
+.form-control:focus {
+    border-color: #2563EB; /* Bright blue on focus */
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: #6B7280; /* Medium gray for placeholder text */
+}
+
+.btn-primary {
+    background-color: #2563EB; /* Bright blue for the button */
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: #1D4ED8; /* Darker blue on hover */
+}
+
+.error-message {
+    color: #DC2626; /* Red for error messages */
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.text-center p {
+    color: #6B7280; /* Medium gray for the "Already registered?" text */
+}
+
+.text-center a {
+    color: #2563EB; /* Bright blue for the login link */
+}
+
+.text-center a:hover {
+    color: #1D4ED8; /* Darker blue on hover for the link */
+}
