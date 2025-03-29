@@ -39,7 +39,7 @@
                         </ul>
                     </div>
         
-                    <a href="#" class="btn btn-primary text-white me-3" data-bs-toggle="modal" data-bs-target="#loginModal"  style="font-size: 12px;">
+                    <a href="#" class="btn btn-warning me-3" data-bs-toggle="modal" data-bs-target="#loginModal"  style="font-size: 12px;">
                         <i class="fas fa-user-circle"></i> Login
                     </a>
         
@@ -147,118 +147,257 @@
             <!-- SECTION 2 ENDS -->
 
             <!-- SECTION 3 STARTS -->
-            <section>
-                <div class="container my-5">
-                    <div class="row g-4 justify-content-center">
-                        <!-- Movie Card 1 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-lg">
-                                <img th:src="@{/img/veeradheerasoora1.jpg}" class="card-img-top" alt="Veera Dheera Sooran">
-                                <div class="card-body d-flex flex-column bg-dark">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <h5 class="card-title fw-bold mb-1 text-white">Veera Dheera Sooran</h5>
-                                        <p class="badge bg-warning text-dark mb-0">UA 16+</p>
+                <section>
+                    <div class="container my-5">
+                        <div class="row g-4">
+                            <!-- Movie Card 1 -->
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/veeradheerasoora1.jpg}" class="card-img-top" alt="Veera Dheera Sooran">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Veera Dheera Sooran</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 16+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-primary me-1">ACTION</span>
+                                            <span class="text-light small">+1 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
-                                    <span><i class="bi bi-clock me-1"></i> 2h 35m</span>
-                                    <div class="mb-2">
-                                        <span class="badge bg-primary me-1">ACTION</span>
-                                        <span class="text-light small">+1 more</span>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-grid gap-2">
-                                            <button class="btn btn-warning fw-bold py-2">
-                                                <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
-                                            </button>
-                                            <button class="btn btn-outline-light">
-                                                <i class="bi bi-info-circle me-1"></i> More Info
-                                            </button>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 35m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 8.2/10</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-transparent border-top border-secondary">
-                                    <div class="d-flex justify-content-between small">
+                            </div>
+                
+                            <!-- Movie Card 2 -->
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/sabdham1.jpg}" class="card-img-top" alt="Sabdham">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Sabdham</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 16+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-primary me-1">THRILLER</span>
+                                            <span class="text-light small">+1 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 20m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 7.9/10</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Movie Card 3 -->
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/empuraan2.jpg}" class="card-img-top" alt="Empuraan">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Empuraan</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 13+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Malayalam</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-danger me-1">ACTION</span>
+                                            <span class="text-light small">+2 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 45m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 8.5/10</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/empuraan2.jpg}" class="card-img-top" alt="Empuraan">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Empuraan</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 13+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Malayalam</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-danger me-1">ACTION</span>
+                                            <span class="text-light small">+2 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 45m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 8.5/10</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/veeradheerasoora1.jpg}" class="card-img-top" alt="Veera Dheera Sooran">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Veera Dheera Sooran</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 16+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-primary me-1">ACTION</span>
+                                            <span class="text-light small">+1 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 35m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 8.2/10</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                         
-                                        <span><i class="bi bi-star-fill text-warning me-1"></i> 8.2/10</span>
+                            <div class="col-md-4">
+                                <div class="card h-100 shadow-lg">
+                                    <img th:src="@{/img/sabdham1.jpg}" class="card-img-top" alt="Sabdham">
+                                    <div class="card-body d-flex flex-column bg-dark">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title fw-bold mb-1 text-white">Sabdham</h5>
+                                            <p class="badge bg-warning text-dark mb-0">UA 16+</p>
+                                        </div>
+                                        <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-primary me-1">THRILLER</span>
+                                            <span class="text-light small">+1 more</span>
+                                        </div>
+                                        <div class="mt-auto">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning fw-bold py-2">
+                                                    <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
+                                                </button>
+                                                <button class="btn btn-outline-light">
+                                                    <i class="bi bi-info-circle me-1"></i> More Info
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <!-- Movie Card 2 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-lg">
-                                <img th:src="@{/img/sabdham1.jpg}" class="card-img-top" alt="Sabdham">
-                                <div class="card-body d-flex flex-column bg-dark">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <h5 class="card-title fw-bold mb-1 text-white">Sabdham</h5>
-                                        <p class="badge bg-warning text-dark mb-0">UA 16+</p>
-                                    </div>
-                                    <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Tamil</p>
-                                    <div class="mb-2">
-                                        <span class="badge bg-primary me-1">THRILLER</span>
-                                        <span class="text-light small">+1 more</span>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-grid gap-2">
-                                            <button class="btn btn-warning fw-bold py-2">
-                                                <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
-                                            </button>
-                                            <button class="btn btn-outline-light">
-                                                <i class="bi bi-info-circle me-1"></i> More Info
-                                            </button>
+                                    <div class="card-footer bg-transparent border-top border-secondary">
+                                        <div class="d-flex justify-content-between small">
+                                            <span><i class="bi bi-clock me-1"></i> 2h 20m</span>
+                                            <span><i class="bi bi-star-fill text-warning me-1"></i> 7.9/10</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-transparent border-top border-secondary">
-                                    <div class="d-flex justify-content-between small">
-                                        <span><i class="bi bi-clock me-1"></i> 2h 20m</span>
-                                        <span><i class="bi bi-star-fill text-warning me-1"></i> 7.9/10</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-            
-                        <!-- Movie Card 3 -->
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-lg">
-                                <img th:src="@{/img/empuraan2.jpg}" class="card-img-top" alt="Empuraan">
-                                <div class="card-body d-flex flex-column bg-dark">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <h5 class="card-title fw-bold mb-1 text-white">Empuraan</h5>
-                                        <p class="badge bg-warning text-dark mb-0">UA 13+</p>
-                                    </div>
-                                    <p class="card-text text-light mb-2"><i class="bi bi-translate me-1"></i> Malayalam</p>
-                                    <div class="mb-2">
-                                        <span class="badge bg-danger me-1">ACTION</span>
-                                        <span class="text-light small">+2 more</span>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <div class="d-grid gap-2">
-                                            <button class="btn btn-warning fw-bold py-2">
-                                                <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
-                                            </button>
-                                            <button class="btn btn-outline-light">
-                                                <i class="bi bi-info-circle me-1"></i> More Info
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top border-secondary">
-                                    <div class="d-flex justify-content-between small">
-                                        <span><i class="bi bi-clock me-1"></i> 2h 45m</span>
-                                        <span><i class="bi bi-star-fill text-warning me-1"></i> 8.5/10</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            
                     </div>
-                </div>
-            </section>
-            
-            
+                </section>
             <!-- SECTION 3 ENDS -->
+
+            <!-- SECTION 4 STARTS -->
+                <section>
+                    <div class="container mt-4">
+                        <!-- Main Trailer with Custom Play Button -->
+                        <div class="main-trailer">
+                            <iframe id="mainTrailer" src="https://www.youtube.com/embed/UWMzKXsY9A4?autoplay=0&controls=0"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                            </iframe>
+                            <div class="custom-play-btn" id="customPlayBtn">▶</div>
+                        </div>
+                    
+                        <!-- Trailer Carousel -->
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-dark" id="prevBtn">❮</button>
+                                <div class="d-flex overflow-auto" id="trailerContainer">
+                                    <div class="trailer-item active mx-2" data-video="UWMzKXsY9A4">
+                                        <img src="https://img.youtube.com/vi/UWMzKXsY9A4/0.jpg">
+                                        <div class="play-overlay"></div>
+                                    </div>
+                                    <div class="trailer-item mx-2" data-video="yNN2PoilSp4"> <!-- Updated Trailer ✅ -->
+                                        <img src="https://img.youtube.com/vi/yNN2PoilSp4/0.jpg">
+                                        <div class="play-overlay"></div>
+                                    </div>
+                                    <div class="trailer-item mx-2" data-video="3tvB9e4gngI">
+                                        <img src="https://img.youtube.com/vi/3tvB9e4gngI/0.jpg">
+                                        <div class="play-overlay"></div>
+                                    </div>
+                                    <div class="trailer-item mx-2" data-video="5cDIfuNcAX0">
+                                        <img src="https://img.youtube.com/vi/5cDIfuNcAX0/0.jpg">
+                                        <div class="play-overlay"></div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-dark" id="nextBtn">❯</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+            <!-- SECTION 4 ENDS -->
+
         </main>
     <!-- MAIN SECTION ENDS -->
 
@@ -357,6 +496,52 @@ searchInput.addEventListener("input", function () {
 clearBtn.addEventListener("click", function () {
     searchInput.value = "";
     clearBtn.style.display = "none";
+});
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const mainTrailer = document.getElementById("mainTrailer");
+    const customPlayBtn = document.getElementById("customPlayBtn");
+    const trailerItems = document.querySelectorAll(".trailer-item");
+
+    // Function to reset and center the play button
+    function resetPlayButton() {
+        customPlayBtn.style.display = "flex"; // Make sure the button is visible
+        customPlayBtn.style.top = "50%"; 
+        customPlayBtn.style.left = "50%"; 
+        customPlayBtn.style.transform = "translate(-50%, -50%)"; 
+    }
+
+    // Play video on clicking the custom play button
+    customPlayBtn.addEventListener("click", function () {
+        mainTrailer.src = mainTrailer.src.replace("autoplay=0", "autoplay=1");
+        customPlayBtn.style.display = "none"; // Hide custom play button
+    });
+
+    // Update trailer when clicking thumbnails
+    trailerItems.forEach(item => {
+        item.addEventListener("click", function () {
+            document.querySelector(".trailer-item.active").classList.remove("active");
+            this.classList.add("active");
+
+            // Load the new trailer with autoplay disabled and controls enabled
+            mainTrailer.src = `https://www.youtube.com/embed/${this.getAttribute("data-video")}?autoplay=0&controls=1&modestbranding=1&showinfo=0`;
+
+            // Reset and re-center the play button
+            resetPlayButton();
+        });
+    });
+
+    // Carousel Scrolling
+    document.getElementById("prevBtn").addEventListener("click", function () {
+        document.getElementById("trailerContainer").scrollBy({ left: -200, behavior: 'smooth' });
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", function () {
+        document.getElementById("trailerContainer").scrollBy({ left: 200, behavior: 'smooth' });
+    });
 });
 
 </script>

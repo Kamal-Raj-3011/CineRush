@@ -73,11 +73,6 @@ header.container-fluid {
 
 
 /* FILTER */
-
-.filter-section {
-    background-color: blue;
-    padding: 15px;
-}
 .filter-btn {
     background-color: #1c3b30;
     color: white;
@@ -120,7 +115,6 @@ header.container-fluid {
 }
 
 /* SEARCH BAR */
-
 .search-container {
     max-width: 400px;
     width: 100%;
@@ -132,6 +126,7 @@ header.container-fluid {
     padding: 12px;
     font-size: 16px;
     background-color: #f5f5f5;
+    border: 1px solid black; 
 }
 
 .search-btn {
@@ -151,7 +146,7 @@ header.container-fluid {
 }
 
 .filter-section {
-    background-color: blue;
+    background-color: #fff0d6;
     padding: 8px 0;
 }
 
@@ -169,4 +164,90 @@ header.container-fluid {
 .dropdown-toggle {
     font-size: 14px;
     padding: 5px 10px;
+}
+
+/* VIDEO CAROUSAL */
+
+.main-trailer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+.main-trailer iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+}
+.trailer-item {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.trailer-item:hover {
+    transform: scale(1.05);
+}
+.trailer-item.active {
+    border: 4px solid yellow;
+}
+.trailer-item img {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.play-overlay::before {
+    content: '▶';
+    color: white;
+    font-size: 20px;
+}
+
+/* Custom Play Button */
+/* Custom Play Button - Fully Covers YouTube Play Button */
+.custom-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    z-index: 3; /* Always on top */
+}
+
+/* Hover Effect */
+.custom-play-btn:hover {
+    background: rgba(0, 0, 0, 1);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Force YouTube Play Button to Be Hidden */
+.main-trailer iframe {
+    z-index: 1; /* Keeps it below our custom button */
 }
