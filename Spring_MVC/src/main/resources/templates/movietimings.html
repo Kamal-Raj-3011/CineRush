@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Showtimes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F5B915;
+            --secondary-color: #6c757d;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        /* GLOBAL */
+        *{
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* NAV BAR */
+
+        header.container-fluid {
+            padding: 0px 0; 
+        }
+
+        .navbar {
+            min-height: 10px;
+            padding: 0px 5px;
+
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+        }
+        
+        .movie-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .movie-poster {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .timing-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .timing-slot {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .timing-slot:hover {
+            background-color: #e9ecef;
+        }
+        
+        .timing-slot.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .timing-time {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .timing-format {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .timing-slot.selected .timing-format {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .language-badge {
+            background-color: #e9ecef;
+            color: var(--dark-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        
+        .cinema-info-card {
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: white;
+        }
+        
+        .back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER STARTS -->
+        <header class="container-fluid">
+            <nav class="navbar navbar-expand-lg px-3">
+                <a class="navbar-brand text-white" href="#">
+                    <img th:src="@{/img/Logo.avif}" alt="Logo" width="40" height="40" class="rounded-circle">
+                </a>
+        
+                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                    <ul class="navbar-nav me-auto" style="font-size: 14px;">
+                        <li class="nav-item ms-5 me-3"><a class="nav-link text-black" href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" href="#"><i class="fas fa-film"></i> Movies</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" th:href="@{/theater}"><i class="fas fa-theater-masks"></i> Theatres</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" th:href="@{/aboutus}"><i class="bi bi-people-fill"></i> About-Us</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" href="#"><img th:src="@{/img/contactus.jpeg}" style="height: 20px;" class="me-1" width="20px"  alt="">Contact-Us</a></li>
+                    </ul>
+                </div>
+        
+                <div class="d-flex ms-auto align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="modal" data-bs-target="#cityModal" style="font-size: 12px;">
+                            <i class="fas fa-map-marker-alt"></i> Salem
+                        </button>
+                    </div>
+        
+                    <a href="#" class="btn btn-warning me-3" data-bs-toggle="modal" data-bs-target="#loginModal"  style="font-size: 12px;">
+                        <i class="fas fa-user-circle"></i> Login
+                    </a>
+        
+                    <button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav">
+                        <li class="nav-item me-3"><a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li class="nav-item me-3"><a class="nav-link" href="#"><i class="fas fa-film"></i> Movies</a></li>
+                        <li class="nav-item me-3"><a class="nav-link" href="#"><i class="fas fa-theater-masks"></i> Theatres</a></li>
+                        <li class="nav-item me-3"><a class="nav-link" href="#"><i class="fas fa-ticket-alt"></i> Orders</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    <!-- HEADER ENDS -->
+
+    <!-- Back Button -->
+    <div class="container mt-3">
+        <a href="cinemas.html" class="btn btn-outline-secondary back-button">
+            <i class="fas fa-arrow-left me-2"></i>Back to Cinemas
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row">
+            <!-- Movie Poster Column -->
+            <div class="col-md-4">
+                <img id="moviePoster" th:src="@{/img/veeradheerasoora1.jpg}" class="movie-poster" alt="Movie Poster">
+            </div>
+            
+            <!-- Movie Details Column -->
+            <div class="col-md-8">
+                <h1 id="movieTitle" class="mb-3"></h1>
+                <div class="cinema-info-card mb-4">
+                    <h4 id="cinemaName" class="mb-2"></h4>
+                    <p id="cinemaAddress" class="text-muted mb-3"></p>
+                    <div>
+                        <span class="language-badge">2D</span>
+                        <span class="language-badge">Tamil</span>
+                        <span class="language-badge">Dolby Atmos</span>
+                    </div>
+                </div>
+                
+                <h3 class="mb-4">Available Showtimes</h3>
+                <div class="timing-container" id="timingContainer">
+                    <!-- Timings will be added dynamically -->
+                </div>
+                
+                <div class="mt-4">
+                    <button class="btn btn-warning btn-lg" id="proceedToSeats" disabled>
+                        Proceed to Select Seats
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Function to parse URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                movie: params.get('movie'),
+                cinema: params.get('cinema'),
+                poster: params.get('poster')
+            };
+        }
+        
+        // Function to generate random showtimes
+        function generateRandomShowtimes(count) {
+            const formats = ['2D', '3D', '4DX', 'IMAX'];
+            const languages = ['Tamil', 'Hindi', 'English', 'Malayalam'];
+            const showtimes = [];
+            
+            for (let i = 0; i < count; i++) {
+                // Random hour between 10 and 22 (10AM to 10PM)
+                const hour = 10 + Math.floor(Math.random() * 12);
+                // Random minutes (0, 15, 30, or 45)
+                const minute = [0, 15, 30, 45][Math.floor(Math.random() * 4)];
+                
+                const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                const displayHour = hour > 12 ? hour - 12 : hour;
+                const displayTime = `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+                
+                const randomFormat = formats[Math.floor(Math.random() * formats.length)];
+                const randomLanguage = languages[Math.floor(Math.random() * languages.length)];
+                
+                showtimes.push({
+                    time: displayTime,
+                    format: randomFormat,
+                    language: randomLanguage,
+                    price: 150 + Math.floor(Math.random() * 150) // Random price between 150 and 300
+                });
+            }
+            
+            // Sort showtimes chronologically
+            showtimes.sort((a, b) => {
+                const [aHour, aMinute] = a.time.split(':').map(part => parseInt(part));
+                const [bHour, bMinute] = b.time.split(':').map(part => parseInt(part));
+                
+                // Convert to 24-hour format for comparison
+                const aIsPM = a.time.includes('PM') && aHour !== 12;
+                const bIsPM = b.time.includes('PM') && bHour !== 12;
+                
+                const a24Hour = aIsPM ? aHour + 12 : (aHour === 12 && a.time.includes('AM') ? 0 : aHour);
+                const b24Hour = bIsPM ? bHour + 12 : (bHour === 12 && b.time.includes('AM') ? 0 : bHour);
+                
+                if (a24Hour !== b24Hour) return a24Hour - b24Hour;
+                return aMinute - bMinute;
+            });
+            
+            return showtimes;
+        }
+        
+        // Function to set cinema address based on cinema name
+        function getCinemaAddress(cinemaName) {
+            const cinemaData = {
+                "INOX Salem Reliance Mall": "Pvt INOX Limited, Hit Floor, Reliance Mall, Fire Roads: Junction, Marycorus, Salem - 638064, Tamil Nadu",
+                "SPR CineCastle": "Suramangalam Main Road, Junction Main Rd, Salem, Tamil Nadu 636005"
+            };
+            return cinemaData[cinemaName] || "Address not available";
+        }
+        
+        // When page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = getUrlParams();
+            const movieTitle = decodeURIComponent(params.movie || 'Movie');
+            const cinemaName = decodeURIComponent(params.cinema || 'Cinema');
+            const posterName = params.poster || 'default.jpg';
+            
+            // Set page title
+            document.title = `${movieTitle} Showtimes - ${cinemaName}`;
+            
+            // Set movie details
+            document.getElementById('movieTitle').textContent = movieTitle;
+            document.getElementById('cinemaName').textContent = cinemaName;
+            document.getElementById('cinemaAddress').textContent = getCinemaAddress(cinemaName);
+            document.getElementById('moviePoster').src = `../static/img/${posterName}`;
+            
+            // Generate and display showtimes
+            const timingContainer = document.getElementById('timingContainer');
+            const showtimes = generateRandomShowtimes(6 + Math.floor(Math.random() * 3));
+            
+            showtimes.forEach(time => {
+                const timingSlot = document.createElement('div');
+                timingSlot.className = 'timing-slot';
+                timingSlot.innerHTML = `
+                    <div class="timing-time">${time.time}</div>
+                    <div class="timing-format">${time.format} | ${time.language}</div>
+                    <div class="timing-format">₹${time.price}</div>
+                `;
+                
+                timingSlot.addEventListener('click', function() {
+                    // Remove selected class from all slots
+                    document.querySelectorAll('.timing-slot').forEach(slot => {
+                        slot.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked slot
+                    this.classList.add('selected');
+                    
+                    // Enable proceed button
+                    document.getElementById('proceedToSeats').disabled = false;
+                });
+                
+                timingContainer.appendChild(timingSlot);
+            });
+            
+            // Proceed to seats button functionality
+            document.getElementById('proceedToSeats').addEventListener('click', function() {
+                const selectedTime = document.querySelector('.timing-slot.selected .timing-time').textContent;
+                alert(`Redirecting to seat selection for:\nMovie: ${movieTitle}\nCinema: ${cinemaName}\nTime: ${selectedTime}`);
+                
+                // In a real application, you would redirect to a seat selection page
+                // window.location.href = `/book-seats?movie=${encodeURIComponent(movieTitle)}&cinema=${encodeURIComponent(cinemaName)}&time=${encodeURIComponent(selectedTime)}`;
+            });
+        });
+    </script>
+</body>
+</html>

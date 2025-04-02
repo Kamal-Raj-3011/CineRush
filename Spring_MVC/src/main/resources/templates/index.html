@@ -23,20 +23,17 @@
                     <ul class="navbar-nav me-auto" style="font-size: 14px;">
                         <li class="nav-item ms-5 me-3"><a class="nav-link text-black" href="#"><i class="fas fa-home"></i> Home</a></li>
                         <li class="nav-item me-3"><a class="nav-link text-black" href="#"><i class="fas fa-film"></i> Movies</a></li>
-                        <li class="nav-item me-3"><a class="nav-link text-black" href="#"><i class="fas fa-theater-masks"></i> Theatres</a></li>
-                        <li class="nav-item me-3"><a class="nav-link text-black" href="#"><i class="fas fa-ticket-alt"></i> Orders</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" th:href="@{/theater}"><i class="fas fa-theater-masks"></i> Theatres</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" th:href="@{/aboutus}"><i class="bi bi-people-fill"></i> About-Us</a></li>
+                        <li class="nav-item me-3"><a class="nav-link text-black" href="#"><img th:src="@{/img/contactus.jpeg}" style="height: 20px;" class="me-1" width="20px"  alt="">Contact-Us</a></li>
                     </ul>
                 </div>
         
                 <div class="d-flex ms-auto align-items-center">
                     <div class="dropdown me-3">
-                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"  style="font-size: 12px;">
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="modal" data-bs-target="#cityModal" style="font-size: 12px;">
                             <i class="fas fa-map-marker-alt"></i> Salem
                         </button>
-                        <ul class="dropdown-menu" style="font-size: 12px;">
-                            <li><a class="dropdown-item" href="#">Chennai</a></li>
-                            <li><a class="dropdown-item" href="#">Coimbatore</a></li>
-                        </ul>
                     </div>
         
                     <a href="#" class="btn btn-warning me-3" data-bs-toggle="modal" data-bs-target="#loginModal"  style="font-size: 12px;">
@@ -166,14 +163,15 @@
                                         </div>
                                         <div class="mt-auto">
                                             <div class="d-grid gap-2">
-                                                <button class="btn btn-warning fw-bold py-2">
+                                                <a th:href="@{/cinema}" class="btn btn-warning fw-bold py-2">
                                                     <i class="bi bi-ticket-perforated me-2"></i>Book Tickets
-                                                </button>
+                                                </a>
                                                 <button class="btn btn-outline-light">
                                                     <i class="bi bi-info-circle me-1"></i> More Info
                                                 </button>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                     <div class="card-footer bg-transparent border-top border-secondary">
                                         <div class="d-flex justify-content-between small">
@@ -360,46 +358,94 @@
                     <div class="container mt-4">
                         <!-- Main Trailer with Custom Play Button -->
                         <div class="main-trailer">
-                            <iframe id="mainTrailer" src="https://www.youtube.com/embed/UWMzKXsY9A4?autoplay=0&controls=0"
+                            <iframe id="mainTrailer" src="https://www.youtube.com/embed/UWMzKXsY9A4?autoplay=0&controls=1&modestbranding=1"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                             </iframe>
                             <div class="custom-play-btn" id="customPlayBtn">▶</div>
                         </div>
-                    
+                
                         <!-- Trailer Carousel -->
                         <div class="mt-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <button class="btn btn-dark" id="prevBtn">❮</button>
-                                <div class="d-flex overflow-auto" id="trailerContainer">
+                                <div class="d-flex overflow-hidden trailer-wrapper" id="trailerContainer">
                                     <div class="trailer-item active mx-2" data-video="UWMzKXsY9A4">
                                         <img src="https://img.youtube.com/vi/UWMzKXsY9A4/0.jpg">
                                         <div class="play-overlay"></div>
                                     </div>
-                                    <div class="trailer-item mx-2" data-video="yNN2PoilSp4"> <!-- Updated Trailer ✅ -->
+                                    <div class="trailer-item mx-2" data-video="yNN2PoilSp4">
                                         <img src="https://img.youtube.com/vi/yNN2PoilSp4/0.jpg">
                                         <div class="play-overlay"></div>
                                     </div>
-                                    <div class="trailer-item mx-2" data-video="3tvB9e4gngI">
-                                        <img src="https://img.youtube.com/vi/3tvB9e4gngI/0.jpg">
+                                    <div class="trailer-item mx-2" data-video="vHPae4sZbu8">
+                                        <img src="https://img.youtube.com/vi/vHPae4sZbu8/0.jpg">
                                         <div class="play-overlay"></div>
                                     </div>
-                                    <div class="trailer-item mx-2" data-video="5cDIfuNcAX0">
-                                        <img src="https://img.youtube.com/vi/5cDIfuNcAX0/0.jpg">
+                                    <div class="trailer-item mx-2" data-video="ryR2-jVjoeA">
+                                        <img src="https://img.youtube.com/vi/ryR2-jVjoeA/0.jpg">
                                         <div class="play-overlay"></div>
                                     </div>
+                                    <div class="trailer-item mx-2" data-video="Cp0d6oAT1qc">
+                                        <img src="https://img.youtube.com/vi/Cp0d6oAT1qc/0.jpg">
+                                        <div class="play-overlay"></div>
+                                    </div>
+                                    
                                 </div>
                                 <button class="btn btn-dark" id="nextBtn">❯</button>
                             </div>
                         </div>
-                        
                     </div>
                 </section>
             <!-- SECTION 4 ENDS -->
-
         </main>
     <!-- MAIN SECTION ENDS -->
+
+    <!-- FOOTER STARTS -->
+        <footer class="bg-dark text-light mt-5 py-5 position-relative">
+            <div class="container">
+                <div class="row text-center text-md-start">
+                    <!-- Logo & Tagline -->
+                    <div class="col-md-4 mb-4">
+                        <h3 class="fw-bold">🎬 CineRush </h3>
+                        <p>Your ultimate destination for seamless movie ticket booking.</p>
+                    </div>
+        
+                    <!-- Navigation Links -->
+                    <div class="col-md-4 mb-4">
+                        <h5 class="text-warning">Quick Links</h5>
+                        <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+                            <a href="#" class="text-light text-decoration-none me-3">Home</a>
+                            <a href="#" class="text-light text-decoration-none me-3">Movies</a>
+                            <a href="#" class="text-light text-decoration-none me-3">Offers</a>
+                            <a href="#" class="text-light text-decoration-none">Contact</a>
+                        </div>
+                    </div>
+        
+                    <!-- Social Media & Movie Fortune -->
+                    <div class="col-md-4 mb-4">
+                        <h5 class="text-warning">🎭 Your Movie Fortune</h5>
+                        <div class="p-3 bg-secondary rounded text-center">
+                            <h6 id="movieFortune" class="fw-bold fst-italic text-warning"></h6>
+                            <button class="btn btn-warning btn-sm mt-2" onclick="generateMovieFortune()">🔮 Reveal My Movie Fortune</button>
+                        </div>
+                        <div class="mt-3">
+                            <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                            <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="text-light"><i class="fab fa-youtube fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+        
+                <hr class="bg-light">
+                <div class="text-center">
+                    &copy; 2025 MovieBook | All rights reserved.
+                </div>
+            </div>
+        </footer>
+    <!-- FOOTER ENDS -->
 
     <!-- LOGIN MODAL STARTS -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -454,6 +500,67 @@
             </div>
         </div>
     <!-- OTP MODAL ENDS -->
+
+    <!-- CITY MODAL STARTS -->
+        <div class="modal fade" id="cityModal" tabindex="-1" aria-labelledby="cityModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content p-3">
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control search-input" placeholder="Search for your city">
+                    </div>
+                    <h5 class="text-center mb-3">Popular Cities</h5>
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 city-list">
+                        <div class="col">
+                            <input type="radio" name="city" id="chennai" class="city-radio">
+                            <label for="chennai">
+                                <div class="city-icon"><img th:src="@{/img/City/Chennai.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Chennai</div>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" name="city" id="coimbatore" class="city-radio">
+                            <label for="coimbatore">
+                                <div class="city-icon"><img th:src="@{/img/City/Coimbatore.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Coimbatore</div>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" name="city" id="madurai" class="city-radio">
+                            <label for="madurai">
+                                <div class="city-icon"><img th:src="@{/img/City/Madurai.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Madurai</div>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" name="city" id="salem" class="city-radio">
+                            <label for="salem">
+                                <div class="city-icon"><img th:src="@{/img/City/Salem.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Salem</div>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" name="city" id="erode" class="city-radio">
+                            <label for="erode">
+                                <div class="city-icon"><img th:src="@{/img/City/Erode.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Erode</div>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="radio" name="city" id="namakkal" class="city-radio">
+                            <label for="namakkal">
+                                <div class="city-icon"><img th:src="@{/img/City/Namakkal.jpeg}" alt="" style="width: 70%;"></div>
+                                <div>Namakkal</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-danger">View All Cities</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- CITY MODAL ENDS -->
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -505,19 +612,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainTrailer = document.getElementById("mainTrailer");
     const customPlayBtn = document.getElementById("customPlayBtn");
     const trailerItems = document.querySelectorAll(".trailer-item");
-
+    const trailerContainer = document.getElementById("trailerContainer");
+    
     // Function to reset and center the play button
     function resetPlayButton() {
-        customPlayBtn.style.display = "flex"; // Make sure the button is visible
-        customPlayBtn.style.top = "50%"; 
-        customPlayBtn.style.left = "50%"; 
-        customPlayBtn.style.transform = "translate(-50%, -50%)"; 
+        customPlayBtn.style.display = "flex";
+        customPlayBtn.style.top = "50%";
+        customPlayBtn.style.left = "50%";
+        customPlayBtn.style.transform = "translate(-50%, -50%)";
     }
 
     // Play video on clicking the custom play button
     customPlayBtn.addEventListener("click", function () {
         mainTrailer.src = mainTrailer.src.replace("autoplay=0", "autoplay=1");
-        customPlayBtn.style.display = "none"; // Hide custom play button
+        customPlayBtn.style.display = "none";
     });
 
     // Update trailer when clicking thumbnails
@@ -526,24 +634,49 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".trailer-item.active").classList.remove("active");
             this.classList.add("active");
 
-            // Load the new trailer with autoplay disabled and controls enabled
-            mainTrailer.src = `https://www.youtube.com/embed/${this.getAttribute("data-video")}?autoplay=0&controls=1&modestbranding=1&showinfo=0`;
+            // Get trailer ID
+            const videoID = this.getAttribute("data-video");
 
-            // Reset and re-center the play button
+            // Load new trailer
+            mainTrailer.src = `https://www.youtube.com/embed/${videoID}?autoplay=0&controls=1&modestbranding=1`;
+
+            // Reset play button
             resetPlayButton();
         });
     });
 
-    // Carousel Scrolling
+    // Smooth Scrolling for Carousel
     document.getElementById("prevBtn").addEventListener("click", function () {
-        document.getElementById("trailerContainer").scrollBy({ left: -200, behavior: 'smooth' });
+        trailerContainer.scrollBy({ left: -200, behavior: 'smooth' });
     });
 
     document.getElementById("nextBtn").addEventListener("click", function () {
-        document.getElementById("trailerContainer").scrollBy({ left: 200, behavior: 'smooth' });
+        trailerContainer.scrollBy({ left: 200, behavior: 'smooth' });
     });
 });
 
+</script>
+
+<script>
+    // List of fun movie predictions
+    const movieFortunes = [
+        "Your next favorite movie will be a sci-fi thriller! 🚀",
+        "You’re about to watch a blockbuster this weekend! 🎥🔥",
+        "A mystery movie will leave you thinking for days! 🕵️‍♂️",
+        "You’ll laugh out loud at a comedy classic soon! 😂🎬",
+        "An unexpected indie film will blow your mind! 🎭",
+        "You're destined to watch a heartwarming drama soon. ❤️",
+        "The next movie you watch will become your all-time favorite! ⭐"
+    ];
+
+    // Generate a random movie fortune
+    function generateMovieFortune() {
+        document.getElementById("movieFortune").innerText = 
+            movieFortunes[Math.floor(Math.random() * movieFortunes.length)];
+    }
+
+    // Generate a movie fortune on page load
+    generateMovieFortune();
 </script>
 
 </body>

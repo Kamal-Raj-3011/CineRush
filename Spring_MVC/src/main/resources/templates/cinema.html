@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Header Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #F5b915;
+            --secondary-color: #6C757D;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+        }
+
+        .movie-header-container {
+            position: relative;
+        }
+
+        .movie-header {
+            background-image: url('../static/img/veeradheerasoora.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            min-height: 300px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .movie-poster {
+            flex-shrink: 0;
+        }
+
+        .movie-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie-meta {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .movie-meta span {
+            margin-right: 10px;
+        }
+
+        .movie-actions a {
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .movie-actions a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            background-color: #fff;
+        }
+
+        .time-button {
+            position: relative;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .time-button:hover {
+            background-color: rgba(245, 185, 21, 0.1);
+        }
+
+        .price-popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            display: none;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            z-index: 10;
+            width: auto;
+            white-space: nowrap;
+            min-width: 220px;
+        }
+
+        .price-popup .price-column {
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+            padding: 0 12px;
+            min-width: 60px;
+        }
+
+        .time-button:hover .price-popup {
+            display: inline-block;
+        }
+
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+            max-width: 100%;
+        }
+
+        .date-radio {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .date-radio-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .date-radio:checked~.date-column {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .date-column {
+            padding: 4px 12px;
+            transition: all 0.2s ease;
+        }
+
+        .movie-header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 20px;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .bg-light {
+            background-color: var(--light-color) !important;
+        }
+
+        .text-success {
+            color: #28a745 !important;
+        }
+
+        .text-muted {
+            color: var(--secondary-color) !important;
+        }
+
+        .btn-outline-secondary {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        @media (max-width: 991px) {
+            .d-flex.bg-light.p-2 {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .d-flex.bg-light.p-2 > div:last-child {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .d-flex.align-items-center.pe-3 .input-group {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .movie-header .d-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .movie-poster {
+                margin-bottom: 20px;
+            }
+
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .date-column {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid px-0">
+        <div class="movie-header text-center justify-content-center">
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <h1 class="movie-title mb-4 ">Veera Dheera Sooran - Part 2</h1>
+                    <div class="d-flex align-items-center gap-2 mb-4 justify-content-center">
+                        <div class="border rounded px-2 py-1 bg-light fw-bold text-dark">2D</div>
+                        <div class="border rounded px-2 py-1 bg-light fw-bold text-dark">Tamil, Telugu</div>
+                    </div>
+                    <div class="movie-meta mb-4">
+                        <span class="text">2h 42m • Action, Thriller • UA13+ • 27 Mar, 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex bg-light p-2 flex-wrap">
+        <div class="d-flex ps-4">
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date1" class="date-radio" checked>
+                <label for="date1" class="date-column text-center pe-3">
+                    <div>THU</div>
+                    <div class="fw-bold">27</div>
+                    <div>MAR</div>
+                </label>
+            </div>
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date2" class="date-radio">
+                <label for="date2" class="date-column text-center pe-3">
+                    <div>FRI</div>
+                    <div class="fw-bold">28</div>
+                    <div>MAR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date3" class="date-radio">
+                <label for="date3" class="date-column text-center pe-3">
+                    <div>SAT</div>
+                    <div class="fw-bold">29</div>
+                    <div>MAR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date4" class="date-radio">
+                <label for="date4" class="date-column text-center pe-3">
+                    <div>SUN</div>
+                    <div class="fw-bold">30</div>
+                    <div>MAR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date5" class="date-radio">
+                <label for="date5" class="date-column text-center pe-3">
+                    <div>MON</div>
+                    <div class="fw-bold">31</div>
+                    <div>MAR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date6" class="date-radio">
+                <label for="date6" class="date-column text-center pe-3">
+                    <div>TUE</div>
+                    <div class="fw-bold">01</div>
+                    <div>APR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date7" class="date-radio">
+                <label for="date7" class="date-column text-center pe-3">
+                    <div>WED</div>
+                    <div class="fw-bold">02</div>
+                    <div>APR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date8" class="date-radio">
+                <label for="date8" class="date-column text-center pe-3">
+                    <div>THU</div>
+                    <div class="fw-bold">03</div>
+                    <div>APR</div>
+                </label>
+            </div>
+
+            <div class="date-radio-container">
+                <input type="radio" name="dateSelection" id="date9" class="date-radio">
+                <label for="date9" class="date-column text-center pe-3">
+                    <div>FRI</div>
+                    <div class="fw-bold">04</div>
+                    <div>APR</div>
+                </label>
+            </div>
+        </div>
+
+        <div class="flex-grow-1"></div>
+
+        <div class="d-flex align-items-center ps-4">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-sm" placeholder="Search by cinema or area">
+                <button class="btn btn-outline-secondary btn-sm" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="box">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h5">Raajam Cineplex 4K Dolby Atmos, Karuppur: Salem</h1>
+                <button class="btn btn-link text-secondary">INFO</button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="d-flex align-items-center gap-2">
+                    <img th:src="@{/img/Ticket.jpeg}" alt="M-Ticket" class="" style="width: 24px; height: 24px;">
+                    <span class="text-success">M-Ticket</span>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <a th:href="@{/seat}" class="w-100">
+                            <button class="btn time-button w-100 py-2">
+                                11:15 AM
+                                <div class="small text-muted">DOLBY ATMOS</div>
+                                <div class="price-popup">
+                                    <div class="price-column">
+                                        <div><strong>₹ 130</strong></div>
+                                        <div>GOLD</div>
+                                        <div class="text-success">Available</div>
+                                    </div>
+                                    <div class="price-column">
+                                        <div><strong>₹ 130</strong></div>
+                                        <div>SILVER</div>
+                                        <div class="text-success">Available</div>
+                                    </div>
+                                </div>
+                            </button>
+                        </a>
+                    </div>
+                
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        02:40 PM
+                        <div class="small text-muted">DOLBY ATMOS</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>SILVER</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        06:30 PM
+                        <div class="small text-muted">DOLBY ATMOS</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>SILVER</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        10:15 PM
+                        <div class="small text-muted">DOLBY ATMOS</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹ 130</strong></div>
+                                <div>SILVER</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <p class="small text-muted mt-3">Non-cancellable</p>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="box">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h5">Aascars Multiplex: Salem</h1>
+                <button class="btn btn-link text-secondary">INFO</button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="d-flex align-items-center gap-2">
+                    <img th:src="@{/img/Ticket.jpeg}" alt="M-Ticket" class="" style="width: 24px; height: 24px;">
+                    <span class="text-success">M-Ticket</span>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        11:15 AM
+                        <div class="small text-muted">DOLBY 7.1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹170</strong></div>
+                                <div>DIAMOND</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹150</strong></div>
+                                <div>PLATINUM</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹120</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        02:40 PM
+                        <div class="small text-muted">DOLBY 7.1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹170</strong></div>
+                                <div>DIAMOND</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹150</strong></div>
+                                <div>PLATINUM</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹120</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        06:30 PM
+                        <div class="small text-muted">DOLBY 7.1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹170</strong></div>
+                                <div>DIAMOND</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹150</strong></div>
+                                <div>PLATINUM</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹120</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        10:15 PM
+                        <div class="small text-muted">DOLBY 7.1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹170</strong></div>
+                                <div>DIAMOND</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹150</strong></div>
+                                <div>PLATINUM</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹120</strong></div>
+                                <div>GOLD</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <p class="small text-muted mt-3">Non-cancellable</p>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="box">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h5">Sangeeth Complex: Salem</h1>
+                <button class="btn btn-link text-secondary">INFO</button>
+            </div>
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="d-flex align-items-center gap-2">
+                    <img th:src="@{/img/Ticket.jpeg}" alt="M-Ticket" class="" style="width: 24px; height: 24px;">
+                    <span class="text-success">M-Ticket</span>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        11:00 AM
+                        <div class="small text-muted">SCREEN 1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹130</strong></div>
+                                <div>BALCONY</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹100</strong></div>
+                                <div>FIRST CLASS</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        02:30 PM
+                        <div class="small text-muted">SCREEN 1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹130</strong></div>
+                                <div>BALCONY</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹100</strong></div>
+                                <div>FIRST CLASS</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        06:30 PM
+                        <div class="small text-muted">SCREEN 1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹130</strong></div>
+                                <div>BALCONY</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹100</strong></div>
+                                <div>FIRST CLASS</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn time-button w-100 py-2">
+                        10:30 PM
+                        <div class="small text-muted">SCREEN 1</div>
+                        <div class="price-popup">
+                            <div class="price-column">
+                                <div><strong>₹130</strong></div>
+                                <div>BALCONY</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                            <div class="price-column">
+                                <div><strong>₹100</strong></div>
+                                <div>FIRST CLASS</div>
+                                <div class="text-success">Available</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <p class="small text-muted mt-3">Non-cancellable</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

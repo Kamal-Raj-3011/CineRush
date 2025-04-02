@@ -36,5 +36,32 @@ public class AdminController {
     public String adminregister() {
         return "adminregister";  // Change this to the page you want to load
     }
+
+    @GetMapping("/theater")
+    public String getCinemas() {
+        return "theater";
+    }
+
+    
+    @GetMapping("/cinema")
+    public String getMovieTime() {
+        return "cinema";
+    }
+
+    @GetMapping("/seat")
+    public String getSeat() {
+        return "seat";
+    }
+
+    @GetMapping("/aboutus")
+    public String aboutUs() {
+        return "aboutus";
+    }
+
+    @GetMapping("/movietimings")
+    public String movieTimings() {
+        return "movietimings";
+    }
+
 }
 
