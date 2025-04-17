@@ -10,7 +10,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/admin/adminstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/superadmin/adminstyle.css}">
 </head>
 
 <body>
@@ -101,9 +101,6 @@
         <div class="container-fluid p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Theater Management</h2>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTheaterModal">
-                    <i class="fas fa-plus me-2"></i>Add New Theater
-                </button>
             </div>
 
             <!-- Theater List -->
@@ -133,68 +130,22 @@
                                     <th>Location</th>
                                     <th>Screens</th>
                                     <th>Contact</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>TH001</td>
-                                    <td>PVR: Forum Mall</td>
-                                    <td>Koramangala, Bangalore</td>
-                                    <td>8</td>
-                                    <td>+91 9876543210</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="fas fa-trash"></i></button>
-                                    </td>
+                                <tr th:each="theater : ${theaters}">
+                                  <td th:text="${theater.theaterName}">TH001</td>
+                                  <td th:text="${theater.theaterName}">PVR: Forum Mall</td>  <!-- Changed 'name' to 'theaterName' -->
+                                  <td th:text="${theater.address}">Koramangala</td>  <!-- Changed 'location' to 'address' -->
+                                  <td th:text="${theater.numberOfScreens}">8</td>  <!-- Changed 'screens' to 'numberOfScreens' -->
+                                  <td th:text="${theater.phone}">+91 9876543210</td>  <!-- Changed 'contact' to 'phone' -->
+                                  <td>
+                                    <!-- Actions -->
+                                  </td>
                                 </tr>
-                                <tr>
-                                    <td>TH002</td>
-                                    <td>INOX: Mantri Square</td>
-                                    <td>Malleswaram, Bangalore</td>
-                                    <td>6</td>
-                                    <td>+91 8765432109</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>TH003</td>
-                                    <td>Cinepolis: Orion Mall</td>
-                                    <td>Rajajinagar, Bangalore</td>
-                                    <td>7</td>
-                                    <td>+91 7654321098</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>TH004</td>
-                                    <td>PVR: Nexus Mall</td>
-                                    <td>Shanthala Nagar, Bangalore</td>
-                                    <td>5</td>
-                                    <td>+91 6543210987</td>
-                                    <td><span class="badge bg-warning text-dark">Maintenance</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1"><i
-                                                class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                              </tbody>
+                              
                         </table>
                     </div>
 
@@ -320,7 +271,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom JS -->
-    <script th:src="@{/js/admin/adminscript.js}"></script>
+    <script th:src="@{/js/superadmin/adminscript.js}"></script>
 </body>
 
 </html>

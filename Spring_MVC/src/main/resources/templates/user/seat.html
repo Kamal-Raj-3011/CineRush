@@ -1,203 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Seat Booking</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Seat Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  background-color: #f5f5f5; /* Light gray background */
+    body {
+      background-color: #f5f5f5;
+      color: black;
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    /* Main wrapper for layout and movie info */
+    .main-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    /* Layout wrapper (75%) */
+    .layout-wrapper {
+      width: 75%;
+      max-height: 90vh;
+      overflow: auto;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 15px;
+      background-color: #fff;
+      touch-action: none;
+      position: relative;
+      user-select: none;
+    }
+
+    .zoom-scroll-area {
+      transform-origin: top;
+      will-change: transform;
+      transition: transform 0.25s ease;
+      transform: scale(0.7);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      margin-bottom: 5px;
+    }
+
+    .seat {
+      flex: 0 0 auto;
+      background-color: white;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      height: 35px;
+      width: 35px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 1px solid #ccc;
+      margin: 5px;
+    }
+
+    .seat.selected {
+      background-color: #f7b500;
+      color: black;
+    }
+
+    .seat.occupied {
+      background-color: #d9d9d9;
+      cursor: not-allowed;
+    }
+
+    .seat:hover {
+      transform: scale(1.1);
+    }
+
+    .text {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .text span {
+      font-weight: bold;
+      color: #f7b500;
+    }
+
+    @media (max-width: 768px) {
+      .seat {
+        height: 28px;
+        width: 28px;
+        font-size: 12px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .text {
+        font-size: 16px;
+      }
+
+      .main-wrapper {
+        flex-direction: column;
+      }
+
+      .layout-wrapper,
+      .movie-info-card {
+        width: 100%;
+      }
+    }
+
+    .layout-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .layout-wrapper {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .container1 {
+      perspective: 1000px;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .screen {
+      background-color: #0e0101;
+      height: 150px;
+      width: 80%;
+      margin: 0 auto;
+      transform: rotateX(-25deg);
+      box-shadow: 0 3px 10px rgba(15, 5, 5, 0.75);
+    }
+
+    .zoom-buttons {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .zoom-buttons button {
+      background-color: #f7b500;
+      border: none;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 18px;
+      color: white;
+    }
+
+    .zoom-buttons button:hover {
+      background-color: #f7a500;
+    }
+
+    /* 25% Movie Info Card */
+    .movie-info-card {
+  width: 25%;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Lato', sans-serif;
   display: flex;
   flex-direction: column;
-  color: black; /* Black text for contrast */
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  font-family: 'Lato', sans-serif;
-  padding: 20px;
+  color: #333;
   text-align: center;
 }
 
-h2 {
+.poster-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.poster-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.poster-wrapper img:hover {
+  transform: scale(1.05);
+}
+
+.movie-details h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.movie-details p {
+  font-size: 16px;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.booking-summary {
   margin-top: 20px;
-  font-size: 22px;
-  color: #333; /* Darker text */
+  background-color: #fff;
+  padding: 15px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  background-color: white; /* White container */
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.booking-summary p {
+  font-size: 14px;
+  color: #555;
   margin-bottom: 5px;
 }
 
-.seat {
-  background-color: white; /* White seats */
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-  height: 35px;
-  width: 35px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid #ccc; /* Light gray border */
+.booking-summary h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #f7b500;
 }
 
-.seat.selected {
-  background-color: #f7b500; /* Yellow for selected seats */
-  color: black;
-}
+  </style>
+</head>
+<body>
 
-.seat.occupied {
-  background-color: #d9d9d9; /* Light gray for occupied seats */
-  cursor: not-allowed;
-}
+  <div class="main-wrapper">
+    <!-- Seat Layout -->
+    <div class="layout-wrapper">
+      <div class="zoom-scroll-area" id="zoomArea">
+        <div class="zoom-buttons">
+          <button id="zoomIn">+</button>
+          <button id="zoomOut">-</button>
+        </div>
+        <div class="container1">
+          <h2>Screen</h2>
+          <div class="screen"></div>
+        </div>
 
-.seat:hover {
-  transform: scale(1.1);
-}
+        <h2>SILVER (₹140)</h2>
+        <div class="container" id="silver-seats"></div>
 
-.text {
-  font-size: 18px;
-  margin-top: 10px;
-}
+        <h2>GOLD (₹190)</h2>
+        <div class="container" id="club-seats"></div>
 
-.text span {
-  font-weight: bold;
-  color: #f7b500; /* Yellow highlight for count & total */
-}
+        <h2>PLATINUM (₹250)</h2>
+        <div class="container" id="executive-seats"></div>
+      </div>
+    </div>
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .seat {
-    height: 28px;
-    width: 28px;
-    font-size: 12px;
-  }
+    <!-- Movie Info Card -->
+    <div class="movie-info-card">
+      <div class="poster-wrapper">
+        <img th:src="@{/img/veeradheerasoora.jpg}" alt="Veera Dheera Sooran Poster">
+      </div>
+      <div class="movie-details">
+        <h3>Veera Dheera Sooran</h3>
+        <p><strong>🎬 Genre:</strong> Action, Drama</p>
+        <p><strong>⏱ Duration:</strong> 2h 44min</p>
+        <p><strong>⭐ Rating:</strong> 4.6</p>
+        <p><strong>🗣 Language:</strong> Tamil</p>
+      </div>
+      <div class="booking-summary">
+        <p>You have selected</p>
+        <h4><span id="count">0</span> Seat(s)</h4>
+        <p>Total Price</p>
+        <h4>₹<span id="total">0</span></h4>
+      </div>
+    </div>
+    
+  </div>
 
-  h2 {
-    font-size: 18px;
-  }
 
-  .text {
-    font-size: 16px;
-  }
-}
 
-    </style>
+  <script>
+    const executiveContainer = document.getElementById('executive-seats');
+    const clubContainer = document.getElementById('club-seats');
+    const silverContainer = document.getElementById('silver-seats');
+    const count = document.getElementById('count');
+    const total = document.getElementById('total');
 
-  <div class="screen"></div>
+    const seatPrices = {
+      executive: 250,
+      club: 190,
+      silver: 140
+    };
 
-    <h2>EXECUTIVE (₹59.94)</h2>
-    <div class="container" id="executive-seats"></div>
+    let selectedSeats = new Set();
 
-    <h2>CLUB (₹190.59)</h2>
-    <div class="container" id="club-seats"></div>
+    const seatLayout = {
+      executive: { rows: ['N', 'M'], seatsPerRow: 12 },
+      club: { rows: ['L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'], seatsPerRow: 25 },
+      silver: { rows: ['R', 'S', 'T'], seatsPerRow: 25 }
+    };
 
-    <p class="text">
-        You have selected <span id="count">0</span> seats for a price of ₹<span id="total">0</span>
-    </p>
-
-    <script src="script.js"></script>
-
-    <script>
-        const executiveContainer = document.getElementById('executive-seats');
-const clubContainer = document.getElementById('club-seats');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
-
-const seatPrices = {
-    executive: 59.94,
-    club: 190.59
-};
-
-let selectedSeats = new Set();
-
-// Seat Layout: Rows & Seat Count Per Row
-const seatLayout = {
-    executive: { rows: ['N', 'M'], seatsPerRow: 12 },
-    club: { rows: ['L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'], seatsPerRow: 25 }
-};
-
-// Generate Seats Function
-function generateSeats(container, category) {
-    seatLayout[category].rows.forEach((row) => {
+    function generateSeats(container, category) {
+      seatLayout[category].rows.forEach((row) => {
         const rowDiv = document.createElement('div');
         rowDiv.classList.add('row');
 
         for (let i = 1; i <= seatLayout[category].seatsPerRow; i++) {
-            const seat = document.createElement('div');
-            seat.classList.add('seat');
-            seat.textContent = `${row}${i}`;
+          const seat = document.createElement('div');
+          seat.classList.add('seat');
+          seat.textContent = `${row}${i}`;
 
-            seat.addEventListener('click', () => toggleSeatSelection(seat, category));
+          seat.addEventListener('click', () => toggleSeatSelection(seat, category));
 
-            rowDiv.appendChild(seat);
+          rowDiv.appendChild(seat);
         }
 
         container.appendChild(rowDiv);
-    });
-}
-
-// Select/Deselect Seat
-function toggleSeatSelection(seat, category) {
-    if (!seat.classList.contains('occupied')) {
-        if (selectedSeats.has(seat.textContent)) {
-            selectedSeats.delete(seat.textContent);
-            seat.classList.remove('selected');
-        } else {
-            selectedSeats.add(seat.textContent);
-            seat.classList.add('selected');
-        }
-
-        updateTotal();
+      });
     }
-}
 
-// Update Total Price
-function updateTotal() {
-    const selectedCount = selectedSeats.size;
-    let totalPrice = 0;
+    function toggleSeatSelection(seat, category) {
+      if (!seat.classList.contains('occupied')) {
+        if (selectedSeats.has(seat.textContent)) {
+          selectedSeats.delete(seat.textContent);
+          seat.classList.remove('selected');
+        } else {
+          selectedSeats.add(seat.textContent);
+          seat.classList.add('selected');
+        }
+        updateTotal();
+      }
+    }
 
-    selectedSeats.forEach(seat => {
-        totalPrice += seat.startsWith('N') || seat.startsWith('M') ? seatPrices.executive : seatPrices.club;
+    function updateTotal() {
+      const selectedCount = selectedSeats.size;
+      let totalPrice = 0;
+
+      selectedSeats.forEach(seat => {
+        totalPrice += seat.startsWith('N') || seat.startsWith('M') ? seatPrices.executive : 
+                      seat.startsWith('R') || seat.startsWith('S') || seat.startsWith('T') ? seatPrices.silver :
+                      seatPrices.club;
+      });
+
+      count.textContent = selectedCount;
+      total.textContent = totalPrice.toFixed(2);
+    }
+
+    generateSeats(executiveContainer, 'executive');
+    generateSeats(clubContainer, 'club');
+    generateSeats(silverContainer, 'silver');
+
+    let scale = 0.7;
+    const zoomInButton = document.getElementById('zoomIn');
+    const zoomOutButton = document.getElementById('zoomOut');
+    const zoomArea = document.getElementById('zoomArea');
+
+    zoomInButton.addEventListener('click', () => {
+      scale = Math.min(scale + 0.1, 2);
+      zoomArea.style.transform = `scale(${scale})`;
     });
 
-    count.textContent = selectedCount;
-    total.textContent = totalPrice.toFixed(2);
-}
-
-// Generate Seating Layouts
-generateSeats(executiveContainer, 'executive');
-generateSeats(clubContainer, 'club');
-
-    </script>
+    zoomOutButton.addEventListener('click', () => {
+      scale = Math.max(scale - 0.1, 0.5);
+      zoomArea.style.transform = `scale(${scale})`;
+    });
+  </script>
 </body>
 </html>

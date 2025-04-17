@@ -87,85 +87,52 @@
                             </div>
                         </div>
                 
-                        <!-- Cinema Cards Container -->
-                        <div id="cinemaContainer">
-                            <!-- INOX Cinema Card -->
-                                <div class="card cinema-card shadow" data-name="inox salem reliance mall" data-location="salem reliance mall junction marycorus tamil nadu">
-                                    <div class="cinema-content">
-                                            <div class="cinema-info">
-                                                <a th:href="@{/cinema-page/{name}(name=${cinemaName})}" class="text-decoration-none">
-                                                <h3 class="cinema-name">INOX Salem Reliance Mall</h3>
-                                                </a>
-                                                <p class="cinema-address">
-                                                    <i class="fas fa-map-marker-alt me-2"></i>
-                                                    Pvt INOX Limited, Hit Floor, Reliance Mall, Fire Roads: Junction, Marycorus, Salem - 638064, Tamil Nadu
-                                                </p>
-                                                <div>
-                                                    <span class="distance-badge">
-                                                        <i class="fas fa-location-arrow me-1"></i> Near Reliance Mall
-                                                    </span>
-                                                    <button class="btn-direction" data-bs-toggle="modal" data-bs-target="#inoxMapModal">
-                                                        <i class="fas fa-directions me-1"></i> <span class="fw-bolder">Direction</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        
-                                        
-                                        <!-- Now Showing Section -->
-                                        <div class="now-showing-section">
-                                            <h5 class="section-title">Now Showing</h5>
-                                            <div class="movies-row">
-                                                <a th:href="@{/movietimings}">
-                                                    <img th:src="@{/img/veeradheerasoora.jpg}" class="movie-banner" alt="Asthram">
-                                                </a>
-                                                <a href="movie-timings.html?movie=Empuraan&cinema=INOX+Salem+Reliance+Mall&poster=empuraan.jpg">
-                                                    <img th:src="@{/img/empuraan.jpg}" class="movie-banner" alt="Empuraan">
-                                                </a>
-                                                <a href="movie-timings.html?movie=Veeradhira+Soora&cinema=INOX+Salem+Reliance+Mall&poster=veeradheerasoora.jpg">
-                                                    <img th:src="@{/img/sabdham1.jpg}" class="movie-banner" alt="Veeradhira Soora">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                
-                            <!-- SPR CineCastle Card -->
-                            <div class="card cinema-card shadow" data-name="spr cinecastle" data-location="suramangalam main road junction salem tamil nadu">
-                                <div class="cinema-content">
-                                    <div class="cinema-info">
-                                        <a th:href="@{/cinema-page/{name}(name=${cinemaName})}" class="text-decoration-none">
-                                            <h3 class="cinema-name">SPR CineCastle</h3>
-                                            </a>
-                                        <p class="cinema-address">
-                                            <i class="fas fa-map-marker-alt me-2"></i>
-                                            Suramangalam Main Road, Junction Main Rd, Salem, Tamil Nadu 636005
-                                        </p>
-                                        <div>
-                                            <span class="distance-badge">
-                                                <i class="fas fa-location-arrow me-1"></i> Near Junction
-                                            </span>
-                                            <button class="btn-direction" data-bs-toggle="modal" data-bs-target="#cinecastleMapModal">
-                                                <i class="fas fa-directions me-1"></i> <span class="fw-bolder">Direction</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Now Showing Section -->
-                                    <div class="now-showing-section">
-                                        <h5 class="section-title">Now Showing</h5>
-                                        <div class="movies-row">
-                                            <a href="movie-timings.html?movie=Empuraan&cinema=SPR+CineCastle&poster=empuraan.jpg">
-                                                <img th:src="@{/img/empuraan.jpg}" class="movie-banner" alt="Empuraan">
-                                            </a>
-                                            <a href="movie-timings.html?movie=Veeradhira+Soora&cinema=SPR+CineCastle&poster=veeradheerasoora.jpg">
-                                                <img th:src="@{/img/veeradheerasoora.jpg}" class="movie-banner" alt="Veeradhira Soora">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!-- Inside <div id="cinemaContainer"> -->
+    <div id="cinemaContainer">
+        <div class="card cinema-card shadow"
+             th:each="theater : ${theaters}"
+             th:attr="data-name=${theater.theaterName}, data-location=${theater.address}">
+             
+            <div class="cinema-content">
+                <div class="cinema-info">
+                    <a th:href="@{/cinema-page/{name}(name=${theater.theaterName})}" class="text-decoration-none">
+                        <h3 class="cinema-name" th:text="${theater.theaterName}">Theater Name</h3>
+                    </a>
+                    <p class="cinema-address">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <span th:text="${theater.address}">Theater Address</span>
+                    </p>
+                    <div>
+                        <span class="distance-badge">
+                            <i class="fas fa-location-arrow me-1"></i> Nearby
+                        </span>
+                        <a class="btn-direction" target="_blank"
+                           th:href="'https://www.google.com/maps/dir/?api=1&destination=' + ${#strings.replace(theater.theaterName + ' ' + theater.address, ' ', '+')}">
+                            <i class="fas fa-directions me-1"></i>
+                            <span class="fw-bolder">Direction</span>
+                        </a>
+                    </div>
+                </div>
+    
+                <!-- Now Showing Section (optional static or dynamic later) -->
+                <div class="now-showing-section">
+                    <h5 class="section-title">Now Showing</h5>
+                    <div class="movies-row">
+                        <a th:href="@{/movietimings}">
+                            <img th:src="@{/img/veeradheerasoora.jpg}" class="movie-banner" alt="Veeradhira Soora">
+                        </a>
+                        <a th:href="@{/movietimings}">
+                            <img th:src="@{/img/empuraan.jpg}" class="movie-banner" alt="Empuraan">
+                        </a>
+                        <a th:href="@{/movietimings}">
+                            <img th:src="@{/img/sabdham1.jpg}" class="movie-banner" alt="Sabdham">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
                         
                         <!-- No Results Message (hidden by default) -->
                         <div id="noResults" class="no-results hidden">
